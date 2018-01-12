@@ -41,19 +41,19 @@
                 <label>County Modal Properties</label>
                 <field id="locale" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1"
                        showInStore="1">
-                    <label>Countrys that should be hinted</label>
-                    <comment>Select Country's that should receive the modal hint</comment>
+                    <label>Countries that should be hinted</label>
+                    <comment>Select countries that should receive the modal hint</comment>
                     <source_model>Magento\Config\Model\Config\Source\Locale</source_model>
                 </field>
-                <field id="editor" translate="label" type="editor" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="editor" translate="label" type="editor" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Modaltext</label>
                     <frontend_model>Magenerds\CountryPopUp\Model\Config\Editor</frontend_model>
                 </field>
-                <field id="country_modal_image" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="20" showInDefault="1" showInWebsite="1" >
+                <field id="country_modal_image" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="30" showInDefault="1" showInWebsite="1" >
                     <label>Modal Image Upload</label>
                     <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
                     <upload_dir config="system" scope_info="1">country_modal_image</upload_dir>
-                    <comment>The following Files Types are allowed jpg, jpeg, png</comment>
+                    <comment>The following file types are allowed jpg, jpeg, png</comment>
                 </field>
             </group>
         </section>

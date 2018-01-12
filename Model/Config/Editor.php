@@ -34,9 +34,9 @@ class Editor extends Field
     ];
 
     /**
-     * @var  Registry
+     * @var  WysiwygConfig
      */
-    protected $_coreRegistry;
+    protected $wysiwygConfig;
 
     /**
      * @param Context $context
@@ -48,7 +48,7 @@ class Editor extends Field
         WysiwygConfig $wysiwygConfig,
         array $data = []
     ) {
-        $this->_wysiwygConfig = $wysiwygConfig;
+        $this->wysiwygConfig = $wysiwygConfig;
         parent::__construct($context, $data);
     }
 
@@ -62,7 +62,7 @@ class Editor extends Field
     {
         $element->setWysiwyg(true);
 
-        $wysiwygConfig = $this->_wysiwygConfig->getConfig($element);
+        $wysiwygConfig = $this->wysiwygConfig->getConfig($element);
 
         foreach (self::UNSET_MAGENTO_WYSIWYG_BUTTONS as $button => $removes) {
             $wysiwygConfig->setData($button, false);
