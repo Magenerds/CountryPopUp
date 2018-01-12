@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ */
+
+/**
+ * @category   Magenerds
+ * @package    Magenerds_CountryPopUp
+ * @subpackage etc
+ * @author     Philipp Steinkopff <p.steinkopff@techdivision.com>
+ * @copyright  Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
+ * @link       http://www.techdivision.com/
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="Magenerds" translate="label" sortOrder="1000">
+            <label>Magenerds</label>
+        </tab>
+        <section id="countrypopup" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Country Popup</label>
+            <tab>Magenerds</tab>
+            <resource>Magenerds_CountryPopUp::config_countrypopup</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="popup_values" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>County Modal Properties</label>
+                <field id="locale" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Countries that should be hinted</label>
+                    <comment>Select countries that should receive the modal hint</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Locale</source_model>
+                </field>
+                <field id="editor" translate="label" type="editor" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Modaltext</label>
+                    <frontend_model>Magenerds\CountryPopUp\Model\Config\Editor</frontend_model>
+                </field>
+                <field id="country_modal_image" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="30" showInDefault="1" showInWebsite="1" >
+                    <label>Modal Image Upload</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+                    <upload_dir config="system" scope_info="1">country_modal_image</upload_dir>
+                    <comment>The following file types are allowed jpg, jpeg, png</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
