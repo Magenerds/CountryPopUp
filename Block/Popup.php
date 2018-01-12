@@ -14,7 +14,6 @@ use Magenerds\CountryPopUp\Helper\Config;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\Element\Template;
-use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * @category    Magenerds
@@ -41,28 +40,21 @@ class Popup extends Template
      */
     private $http;
 
-    /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
 
     /**
      * @param Config $config
      * @param Context $context
      * @param Http $http
-     * @param StoreManagerInterface $storeManager
      * @param array $data
      */
     public function __construct(
         Config $config,
         Context $context,
         Http $http,
-        StoreManagerInterface $storeManager,
         array $data = []
     ) {
         $this->config = $config;
         $this->http = $http;
-        $this->storeManager = $storeManager;
         parent::__construct($context, $data);
     }
 
@@ -103,7 +95,7 @@ class Popup extends Template
      */
     public function getModalImage()
     {
-        $mediaUrl = $this->storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
+        $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
 
         if (!empty($this->config->getPopUpImage())) {
             return $mediaUrl . self::SUBMEDIA_FOLDER . '/' . $this->config->getPopUpImage();
