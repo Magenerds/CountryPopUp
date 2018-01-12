@@ -50,7 +50,7 @@ define([
             var matchedCountry = false,
                 that = this;
             this.options.user_countrys.forEach(function (elem) {
-                if ($.inArray(elem, that.options.hinted_countrys)) {
+                if ($.inArray(elem, that.options.hinted_countrys) >= 0) {
                     matchedCountry = true;
                 }
             });
