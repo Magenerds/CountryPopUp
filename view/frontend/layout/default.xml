@@ -21,6 +21,6 @@
         <css src="Magenerds_CountryPopUp::css/language_popup.css"/>
     </head>
     <referenceContainer name="content.bottom">
-        <block ifconfig="countrypopup/general/enable" class="Magenerds\CountryPopUp\Block\Popup" name="magenerds.countrypopup" template="Magenerds_CountryPopUp::modal_container.phtml" after="-" />
+        <block ifconfig="countrypopup/general/enable" class="Magenerds\CountryPopUp\Block\Popup" name="magenerds.countrypopup" template="Magenerds_CountryPopUp::modal_container.phtml" after="-" cacheable="false" />
     </referenceContainer>
 </page>
