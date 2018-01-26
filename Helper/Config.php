@@ -25,12 +25,12 @@ class Config extends AbstractHelper
     /**
      * Config path to modal text value
      */
-    const POPUP_TEXT = 'countrypopup/popup_values/editor';
+    const POPUP_TEXT = 'countrypopup/popup_values/country_';
 
     /**
      * Config path to modal text value
      */
-    const POPUP_LOCALES = 'countrypopup/popup_values/locale';
+    const POPUP_COUNTRIES = 'countrypopup/popup_values/countries';
 
     /**
      * Config path to modal text value
@@ -38,14 +38,46 @@ class Config extends AbstractHelper
     const POPUP_IMAGE = 'countrypopup/popup_values/country_modal_image';
 
     /**
-     * return newsletter modal text
+     * Config path to modal text value
+     */
+    const COOKIE_DURATION = 'countrypopup/general/cookie';
+
+    /**
+     * Config field prefix
+     */
+    const COUNTRY_GROUP_PREFIX = 'countrypopup/popup_values';
+
+    /**
+     * Config element prefix
+     */
+    const COUNTRY_PREFIX = 'country_';
+
+    /**
+     * config path of the editor source model
+     */
+    const EDITOR_CONFIG_PATH = 'Magenerds\CountryPopUp\Model\Config\Editor';
+
+    /**
+     * return modal text
+     *
+     * @param string $locale
+     * @param string $scope
+     * @return string
+     */
+    public function getModalText($locale, $scope = ScopeInterface::SCOPE_STORE)
+    {
+        return $this->scopeConfig->getValue(self::POPUP_TEXT . $locale, $scope);
+    }
+
+    /**
+     * return cookie duration
      *
      * @param string $scope
      * @return string
      */
-    public function getModalText($scope = ScopeInterface::SCOPE_STORE)
+    public function getCookieDuration($scope = ScopeInterface::SCOPE_STORE)
     {
-        return $this->scopeConfig->getValue(self::POPUP_TEXT, $scope);
+        return $this->scopeConfig->getValue(self::COOKIE_DURATION, $scope);
     }
 
     /**
@@ -60,13 +92,19 @@ class Config extends AbstractHelper
     }
 
     /**
-     * return newsletter modal text
+     * returns selected countries
      *
      * @param string $scope
-     * @return string
+     * @return []
      */
-    public function getLocales($scope = ScopeInterface::SCOPE_STORE)
+    public function getCountries($scope = ScopeInterface::SCOPE_STORE)
     {
-        return $this->scopeConfig->getValue(self::POPUP_LOCALES, $scope);
+        $values = $this->scopeConfig->getValue(self::POPUP_COUNTRIES, $scope);
+
+        if ($values) {
+            return explode(',', $values);
+        }
+
+        return [];
     }
 }

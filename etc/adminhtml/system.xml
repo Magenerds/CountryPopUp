@@ -36,17 +36,24 @@
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="cookie" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cookie Duration</label>
+                    <validate>integer</validate>
+                    <comment>Define Duration of the cookie in mm empty value is equal to session cookies</comment>
+                    <comment> <![CDATA[Define Duration of the cookie <strong>in *days*</strong> empty or 0 is equal to session duration]]></comment>
+                </field>
             </group>
             <group id="popup_values" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>County Modal Properties</label>
-                <field id="locale" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1"
+                <field id="countries" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Countries that should be hinted</label>
-                    <comment>Select countries that should receive the modal hint</comment>
-                    <source_model>Magento\Config\Model\Config\Source\Locale</source_model>
+                    <comment> <![CDATA[Select countries that should receive the modal hint <br /><br /><strong>Notice:</strong> that the Country Specific fields will be shown after saving the Country Selection!]]></comment>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                 </field>
                 <field id="editor" translate="label" type="editor" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Modaltext</label>
+                    <label>Default Modaltext</label>
+                    <comment> <![CDATA[<strong>Notice:</strong> this Text will only be shown if the User is using a unknown language beside hinted and default store language]]></comment>
                     <frontend_model>Magenerds\CountryPopUp\Model\Config\Editor</frontend_model>
                 </field>
                 <field id="country_modal_image" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="30" showInDefault="1" showInWebsite="1" >

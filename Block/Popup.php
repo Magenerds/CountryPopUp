@@ -61,31 +61,61 @@ class Popup extends Template
     /**
      * loads modal text
      *
+     * @param $locale string
      * @return string
      */
-    public function getModalText()
+    public function getModalText($locale)
     {
-        return $this->config->getModalText();
+        return $this->config->getModalText($locale);
+    }
+
+    /**
+     * loads modal text
+     *
+     * @return string
+     */
+    public function getCookieDuration()
+    {
+        return $this->config->getCookieDuration();
     }
 
     /**
      * loads configured locales
      *
-     * @return string
+     * @return []
      */
     public function getHintedLocales()
     {
-        return $this->config->getLocales();
+        return $this->config->getCountries();
     }
 
     /**
-     * loads accepted languages
+     * loads accepted languages and compare these languages with all
+     * hinted languages and break
      *
-     * @return string
+     * @return []
      */
-    public function getUserLocales()
+    public function hintedCountry()
     {
-        return $this->parseLanguages($this->http->getHeader('Accept-Language'));
+        $hintedLangs = $this->getHintedLocales();
+        $formatedUserLangs = $this->parseUserLanguages($this->http->getHeader('Accept-Language'));
+        $hit = false;
+        $lang = false;
+
+        foreach ($formatedUserLangs as $userLang)
+        {
+            $hit = in_array($userLang, $hintedLangs);
+            if ($hit)
+            {
+                $lang = $userLang;
+                break;
+            }
+        }
+
+        return [
+            'hinted' => $hit,
+            'locale' => $lang
+        ];
     }
 
     /**
@@ -96,7 +126,6 @@ class Popup extends Template
     public function getModalImage()
     {
         $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
-
         if (!empty($this->config->getPopUpImage())) {
             return $mediaUrl . self::SUBMEDIA_FOLDER . '/' . $this->config->getPopUpImage();
         }
@@ -105,24 +134,30 @@ class Popup extends Template
     }
 
     /**
-     * format the accepted languages
+     * format the accepted user languages into a comparable array
      *
      * @param $acceptedLangs string
-     * @return string
+     * @return []
      */
-    private function parseLanguages($acceptedLangs)
+    private function parseUserLanguages($acceptedLangs)
     {
-        $str = '';
-        $acceptedLangs = str_replace('-','_', $acceptedLangs);
+        $acceptedUserLang = [];
         foreach (explode(',', $acceptedLangs) as $lang) {
             $ident = ';q=';
+            $exp = '-';
             if (strpos($lang, $ident) !== false) {
-                $str .= strstr($lang, $ident, true) . ',';
+                $str = strstr($lang, $ident, true);
             } else {
-                $str .= $lang . ',';
+                $str = $lang;
+            }
+            if (strpos($str, $exp))
+            {
+                $acceptedUserLang[] = trim(strstr($str , $exp), $exp);
+            } else {
+                $acceptedUserLang[] = strtoupper($str);
             }
         }
 
-        return $str;
+        return $acceptedUserLang;
     }
 }
