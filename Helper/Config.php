@@ -86,8 +86,8 @@ class Config extends AbstractHelper
      */
     public function getModalText($locale, $scope = ScopeInterface::SCOPE_STORE)
     {
-        $config_path = ($locale === self::FALLBACK) ? self::POPUP_FALLBACK_TEXT : self::POPUP_TEXT . $locale;
-        return $this->scopeConfig->getValue($config_path, $scope);
+        $configPath = ($locale === self::FALLBACK) ? self::POPUP_FALLBACK_TEXT : self::POPUP_TEXT . $locale;
+        return $this->scopeConfig->getValue($configPath, $scope);
     }
 
     /**

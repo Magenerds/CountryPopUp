@@ -109,18 +109,8 @@ class Popup extends Template
     {
         $hintedLangs = $this->getHintedLocales();
         $formatedUserLangs = $this->parseUserLanguages($this->http->getHeader('Accept-Language'));
-        $hit = false;
-        $lang = false;
-
-        foreach ($formatedUserLangs as $userLang)
-        {
-            $hit = in_array($userLang, $hintedLangs);
-            if ($hit)
-            {
-                $lang = $userLang;
-                break;
-            }
-        }
+        $lang = array_shift(array_intersect($hintedLangs, $formatedUserLangs));
+        $hit = $lang !== null;
 
         return [
             'hinted' => $hit,
@@ -161,8 +151,7 @@ class Popup extends Template
             } else {
                 $str = $lang;
             }
-            if (strpos($str, $exp))
-            {
+            if (strpos($str, $exp)) {
                 $acceptedUserLang[] = trim(strstr($str , $exp), $exp);
             } else {
                 $acceptedUserLang[] = strtoupper($str);
