@@ -17,11 +17,9 @@
  * @link       http://www.techdivision.com/
  */
  -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Magenerds_CountryPopUp" setup_version="1.1.0">
-        <sequence>
-            <module name="Magento_Config"/>
-        </sequence>
-    </module>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="\Magento\Config\Model\Config\Structure\Element\Group">
+        <plugin name="dynamic_config_fields" type="Magenerds\CountryPopUp\Plugin\Config\Group"/>
+    </type>
 </config>

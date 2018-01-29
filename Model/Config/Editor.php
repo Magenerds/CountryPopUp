@@ -66,6 +66,7 @@ class Editor extends Field
 
         foreach (self::UNSET_MAGENTO_WYSIWYG_BUTTONS as $button => $removes) {
             $wysiwygConfig->setData($button, false);
+            $wysiwygConfig->setData('height', '250px');
             $wysiwygConfig->unsetData($removes);
         }
 
