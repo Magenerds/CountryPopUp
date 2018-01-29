@@ -17,12 +17,13 @@
  */
 
 $hintedCountry = $this->hintedCountry();
-
 ?>
 <div data-mage-init='{
     "countryModal":{
-        "hinted_country":   "<?php echo var_export($hintedCountry['hinted'], true); ?>",
-        "cookie_lifetime":  "<?php echo $this->getCookieDuration(); ?>"
+        "hinted_country":       <?php echo var_export($hintedCountry['hinted'], true); ?>,
+        "cookie_lifetime":      "<?php echo $this->getCookieDuration(); ?>",
+        "show_for_unselected":  "<?php echo $this->getShowForUnselected(); ?>",
+        "default_store":        <?php echo var_export($hintedCountry['defaultStore'], true); ?>
     }
 }' id="language-modal" style="display:none;">
     <?php if($this->getModalImage()): ?>
@@ -31,6 +32,6 @@ $hintedCountry = $this->hintedCountry();
         </div>
     <?php endif; ?>
     <div class="content clearfix">
-        <?php echo $this->getModalText($hintedCountry['locale']); ?>
+        <?php echo $this->getModalText($hintedCountry['locale'], $this->getShowForUnselected()); ?>
     </div>
 </div>

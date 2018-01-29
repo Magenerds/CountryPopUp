@@ -40,7 +40,6 @@ class Popup extends Template
      */
     private $http;
 
-
     /**
      * @param Config $config
      * @param Context $context
@@ -66,6 +65,7 @@ class Popup extends Template
      */
     public function getModalText($locale)
     {
+        $locale = ($locale) ? $locale : Config::FALLBACK;
         return $this->config->getModalText($locale);
     }
 
@@ -77,6 +77,16 @@ class Popup extends Template
     public function getCookieDuration()
     {
         return $this->config->getCookieDuration();
+    }
+
+    /**
+     * return show for unselected state
+     *
+     * @return integer
+     */
+    public function getShowForUnselected()
+    {
+        return $this->config->getShowForUnselected();
     }
 
     /**
@@ -114,7 +124,8 @@ class Popup extends Template
 
         return [
             'hinted' => $hit,
-            'locale' => $lang
+            'locale' => $lang,
+            'defaultStore' => $this->checkDefaultStoreLang($formatedUserLangs)
         ];
     }
 
@@ -159,5 +170,14 @@ class Popup extends Template
         }
 
         return $acceptedUserLang;
+    }
+
+    /**
+     * @param [] $formatedUserLangs
+     * @return boolean
+     */
+    private function checkDefaultStoreLang($formatedUserLangs)
+    {
+        return in_array($this->config->getStoreCountry(), $formatedUserLangs);
     }
 }

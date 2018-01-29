@@ -23,9 +23,19 @@ use Magento\Store\Model\ScopeInterface;
 class Config extends AbstractHelper
 {
     /**
+     * Config path to default country
+     */
+    const STORE_DEFAULT_COUNTRY = 'general/country/default';
+
+    /**
      * Config path to modal text value
      */
     const POPUP_TEXT = 'countrypopup/popup_values/country_';
+
+    /**
+     * Config path to modal text value
+     */
+    const POPUP_FALLBACK_TEXT = 'countrypopup/popup_values/editor';
 
     /**
      * Config path to modal text value
@@ -43,6 +53,11 @@ class Config extends AbstractHelper
     const COOKIE_DURATION = 'countrypopup/general/cookie';
 
     /**
+     * Config path to show for unselected Countries
+     */
+    const SHOW_FOR_UNSELECTED = 'countrypopup/general/unselected_countries_text';
+
+    /**
      * Config field prefix
      */
     const COUNTRY_GROUP_PREFIX = 'countrypopup/popup_values';
@@ -58,6 +73,11 @@ class Config extends AbstractHelper
     const EDITOR_CONFIG_PATH = 'Magenerds\CountryPopUp\Model\Config\Editor';
 
     /**
+     * fallback detect string
+     */
+    const FALLBACK = 'fallback';
+
+    /**
      * return modal text
      *
      * @param string $locale
@@ -66,7 +86,8 @@ class Config extends AbstractHelper
      */
     public function getModalText($locale, $scope = ScopeInterface::SCOPE_STORE)
     {
-        return $this->scopeConfig->getValue(self::POPUP_TEXT . $locale, $scope);
+        $config_path = ($locale === self::FALLBACK) ? self::POPUP_FALLBACK_TEXT : self::POPUP_TEXT . $locale;
+        return $this->scopeConfig->getValue($config_path, $scope);
     }
 
     /**
@@ -81,6 +102,17 @@ class Config extends AbstractHelper
     }
 
     /**
+     * return show for unselected state
+     *
+     * @param string $scope
+     * @return integer
+     */
+    public function getShowForUnselected($scope = ScopeInterface::SCOPE_STORE)
+    {
+        return $this->scopeConfig->getValue(self::SHOW_FOR_UNSELECTED, $scope);
+    }
+
+    /**
      * return popup image url
      *
      * @param string $scope
@@ -89,6 +121,17 @@ class Config extends AbstractHelper
     public function getPopUpImage($scope = ScopeInterface::SCOPE_STORE)
     {
         return $this->scopeConfig->getValue(self::POPUP_IMAGE, $scope);
+    }
+
+    /**
+     * return default country code
+     *
+     * @param string $scope
+     * @return string image upload path
+     */
+    public function getStoreCountry($scope = ScopeInterface::SCOPE_STORE)
+    {
+        return $this->scopeConfig->getValue(self::STORE_DEFAULT_COUNTRY, $scope);
     }
 
     /**

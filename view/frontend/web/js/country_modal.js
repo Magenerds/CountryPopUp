@@ -38,7 +38,7 @@ define([
                 },
                 popup = modal(options, this.element);
 
-            if (this.options.show_modal !== true && this.options.hinted_country) {
+            if (!this.options.show_modal && !this.options.default_store) {
                 this.element.modal('openModal', true);
                 $.cookieStorage.setConf({
                     path: '/',
