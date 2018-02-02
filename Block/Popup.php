@@ -116,6 +116,7 @@ class Popup extends Template
         return [
             'hinted' => $hit,
             'locale' => $lang,
+            'userLocales' => implode(',', $formatedUserLangs),
             'defaultStore' => $this->checkDefaultStoreLang($formatedUserLangs)
         ];
     }
