@@ -21,6 +21,7 @@ $hintedCountry = $this->hintedCountry();
 <div data-mage-init='{
     "countryModal":{
         "hinted_country":       <?php echo var_export($hintedCountry['hinted'], true); ?>,
+        "user_locales":         "<?php echo $hintedCountry['userLocales']; ?>",
         "cookie_lifetime":      "<?php echo $this->getCookieDuration(); ?>",
         "show_for_unselected":  "<?php echo $this->getShowForUnselected(); ?>",
         "default_store":        <?php echo var_export($hintedCountry['defaultStore'], true); ?>

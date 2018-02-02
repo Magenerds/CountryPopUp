@@ -116,6 +116,7 @@ class Popup extends Template
         return [
             'hinted' => $hit,
             'locale' => $lang,
+            'userLocales' => implode(',', $formatedUserLangs),
             'defaultStore' => $this->checkDefaultStoreLang($formatedUserLangs)
         ];
     }
@@ -145,17 +146,19 @@ class Popup extends Template
     {
         $acceptedUserLang = [];
         foreach (explode(',', $acceptedLangs) as $lang) {
-            $ident = ';q=';
+            $lang = strtoupper($lang);
+            $ident = ';Q=';
             $exp = '-';
             if (strpos($lang, $ident) !== false) {
                 $str = strstr($lang, $ident, true);
             } else {
                 $str = $lang;
             }
+
             if (strpos($str, $exp)) {
                 $acceptedUserLang[] = trim(strstr($str , $exp), $exp);
             } else {
-                $acceptedUserLang[] = strtoupper($str);
+                $acceptedUserLang[] = $str;
             }
         }
 
