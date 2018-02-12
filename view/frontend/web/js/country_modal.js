@@ -21,13 +21,48 @@ define([
 ], function ($, modal) {
     'use strict';
     $.widget('countryModal.js', {
+
+        /**
+         * init module
+         * @private
+         */
         _create: function() {
             this.options.show_modal = $.cookieStorage.get('country_popup_shown');
+            this.getModalData();
+        },
+
+        /**
+         * load modal data continue only in case of success
+         */
+        getModalData: function () {
+            if (!this.options.show_modal) {
+                var that = this;
+                $.ajax({
+                    url: this.options.contentPath,
+                    type: 'get',
+                    async: true,
+                    success: function(response) {
+                        that.options.default_store = (response.defaultStore) ? response.defaultStore : false;
+                        that.prepareModal(response);
+                    }
+                });
+            }
+        },
+
+        /**
+         * fill loaded data into modal
+         *
+         * @param values object
+         */
+        prepareModal: function (values) {
+            var content = $(values.modalContent);
+            this.element.find('img').attr('src', values.modalImage);
+            this.element.find('.content').append(content);
             this.initModal();
         },
 
         /**
-         * init modal if modal was opened successfully
+         * init modal
          */
         initModal: function () {
             var options = {
@@ -46,8 +81,7 @@ define([
                 });
                 $.cookieStorage.set('country_popup_shown', true);
             }
-        },
-
+        }
     });
     return $.countryModal.js;
 });

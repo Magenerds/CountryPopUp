@@ -9,6 +9,7 @@
 
 namespace Magenerds\CountryPopUp\Block;
 
+use Magento\Framework\Url;
 use Magento\Framework\UrlInterface;
 use Magenerds\CountryPopUp\Helper\Config;
 use Magento\Framework\App\Request\Http;
@@ -41,20 +42,29 @@ class Popup extends Template
     private $http;
 
     /**
+     * @var Url
+     */
+    private $urlHelper;
+
+    /**
      * @param Config $config
      * @param Context $context
      * @param Http $http
+     * @param Url $urlHelper
      * @param array $data
      */
     public function __construct(
         Config $config,
         Context $context,
         Http $http,
+        Url $urlHelper,
         array $data = []
-    ) {
+    )
+    {
         $this->config = $config;
         $this->http = $http;
         parent::__construct($context, $data);
+        $this->urlHelper = $urlHelper;
     }
 
     /**
@@ -100,6 +110,17 @@ class Popup extends Template
     }
 
     /**
+     * provides current store url
+     *
+     * @param string $param
+     * @return string
+     */
+    public function getModalContentUrl($param)
+    {
+        return $this->urlHelper->getUrl($param);
+    }
+
+    /**
      * loads accepted languages and compare these languages with all
      * hinted languages and break
      *
@@ -114,10 +135,13 @@ class Popup extends Template
         $hit = $lang !== null;
 
         return [
-            'hinted' => $hit,
-            'locale' => $lang,
-            'userLocales' => implode(',', $formatedUserLangs),
-            'defaultStore' => $this->checkDefaultStoreLang($formatedUserLangs)
+            'hinted'        => $hit,
+            'locale'        => $lang,
+            'userLocales'   => implode(',', $formatedUserLangs),
+            'defaultStore'  => $this->checkDefaultStoreLang($formatedUserLangs),
+            'modalImage'    => $this->getModalImage(),
+            'storeUrl'      => $this->getStoreUrl(),
+            'modalContent'  => $this->getModalText($lang, $this->getShowForUnselected())
         ];
     }
 
@@ -144,6 +168,7 @@ class Popup extends Template
      */
     private function parseUserLanguages($acceptedLangs)
     {
+        $acceptedLangs = str_replace(' ', '', $acceptedLangs);
         $acceptedUserLang = [];
         foreach (explode(',', $acceptedLangs) as $lang) {
             $lang = strtoupper($lang);
