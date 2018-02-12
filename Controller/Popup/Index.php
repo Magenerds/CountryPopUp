@@ -60,10 +60,10 @@ class Index extends Action
     }
 
     /**
-     * @return \Magento\Framework\Controller\Result\Json
+     * @return JsonFactory
      */
     public function execute() {
-        /** @var \Magento\Framework\Controller\Result\Json $result */
+        /** @var JsonFactory $result */
         $result = $this->resultJsonFactory->create();
         return $result->setData($this->popup->hintedCountry());
     }

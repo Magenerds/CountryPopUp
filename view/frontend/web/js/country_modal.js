@@ -72,7 +72,7 @@ define([
                     wrapperClass: 'hint-country-modal'
                 },
                 popup = modal(options, this.element);
-            console.log(this.options.default_store);
+
             if (!this.options.show_modal && !this.options.default_store) {
                 this.element.modal('openModal', true);
                 $.cookieStorage.setConf({
@@ -81,8 +81,7 @@ define([
                 });
                 $.cookieStorage.set('country_popup_shown', true);
             }
-        },
-
+        }
     });
     return $.countryModal.js;
 });

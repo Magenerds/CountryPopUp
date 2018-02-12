@@ -9,6 +9,7 @@
 
 namespace Magenerds\CountryPopUp\Block;
 
+use Magento\Framework\Url;
 use Magento\Framework\UrlInterface;
 use Magenerds\CountryPopUp\Helper\Config;
 use Magento\Framework\App\Request\Http;
@@ -41,21 +42,29 @@ class Popup extends Template
     private $http;
 
     /**
+     * @var Url
+     */
+    private $urlHelper;
+
+    /**
      * @param Config $config
      * @param Context $context
      * @param Http $http
+     * @param Url $urlHelper
      * @param array $data
      */
     public function __construct(
         Config $config,
         Context $context,
         Http $http,
+        Url $urlHelper,
         array $data = []
     )
     {
         $this->config = $config;
         $this->http = $http;
         parent::__construct($context, $data);
+        $this->urlHelper = $urlHelper;
     }
 
     /**
@@ -103,11 +112,12 @@ class Popup extends Template
     /**
      * provides current store url
      *
+     * @param string $param
      * @return string
      */
-    public function getStoreUrl()
+    public function getModalContentUrl($param)
     {
-        return $this->_storeManager->getStore()->getBaseUrl();
+        return $this->urlHelper->getUrl($param);
     }
 
     /**
