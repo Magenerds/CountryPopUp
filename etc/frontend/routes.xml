@@ -1,4 +1,5 @@
-<?php
+<?xml version="1.0"?>
+<!--
 /**
  * NOTICE OF LICENSE
  *
@@ -6,20 +7,20 @@
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
  */
-
 /**
  * @category   Magenerds
  * @package    Magenerds_CountryPopUp
  * @subpackage view
+ * @author     Philipp Steinkopff <p.steinkopff@techdivision.com>
  * @copyright  Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
  * @link       http://www.techdivision.com/
- * @author     Philipp Steinkopff <p.steinkopff@techdivision.com>
  */
-?>
-<div data-mage-init='{"countryModal":{"contentPath": "<?php echo $this->getStoreUrl(); ?>popup/Popup/Index"}}' id="language-modal" style="display:none;">
-    <div class="img-wrapper">
-        <img class="modalImage" />
-    </div>
-    <div class="content clearfix">
-    </div>
-</div>
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="standard">
+        <route id="popup" frontName="popup">
+            <module name="Magenerds_CountryPopUp"/>
+        </route>
+    </router>
+</config>

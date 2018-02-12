@@ -21,45 +21,48 @@ define([
 ], function ($, modal) {
     'use strict';
     $.widget('countryModal.js', {
+
+        /**
+         * init module
+         * @private
+         */
         _create: function() {
-            this.options.user_countrys = this.prepareParam(this.options.user_countrys);
-            this.options.hinted_countrys = this.prepareParam(this.options.hinted_countrys);
             this.options.show_modal = $.cookieStorage.get('country_popup_shown');
+            this.getModalData();
+        },
+
+        /**
+         * load modal data continue only in case of success
+         */
+        getModalData: function () {
+            if (!this.options.show_modal) {
+                var that = this;
+                $.ajax({
+                    url: this.options.contentPath,
+                    type: 'get',
+                    async: true,
+                    success: function(response) {
+                        that.options.default_store = (response.defaultStore) ? response.defaultStore : false;
+                        that.prepareModal(response);
+                    }
+                });
+            }
+        },
+
+        /**
+         * fill loaded data into modal
+         *
+         * @param values object
+         */
+        prepareModal: function (values) {
+            var content = $(values.modalContent);
+            this.element.find('img').attr('src', values.modalImage);
+            this.element.find('.content').append(content);
             this.initModal();
         },
 
         /**
-         * clear param from unnecessary comas and whitespaces and converted to array
-         *
-         * @param param string
-         * @return formatted array
-         */
-        prepareParam: function (param) {
-            param = param.replace(/\s/g,'').split(',');
-            return param.filter(function(el){
-                return el !== "";
-            });
-        },
-
-        /**
-         * check if the configured country and language combination is inside of the array
-         *
-         * @returns {boolean}
-         */
-        countryCheck: function () {
-            var matchedCountry = false,
-                that = this;
-            this.options.user_countrys.forEach(function (elem) {
-                if ($.inArray(elem, that.options.hinted_countrys) >= 0) {
-                    matchedCountry = true;
-                }
-            });
-
-            return matchedCountry;
-        },
-
-        /**
-         * init modal if modal was opened successfully
+         * init modal
          */
         initModal: function () {
             var options = {
@@ -69,9 +72,13 @@ define([
                     wrapperClass: 'hint-country-modal'
                 },
                 popup = modal(options, this.element);
-
-            if (this.options.show_modal !== true && this.countryCheck()) {
+            console.log(this.options.default_store);
+            if (!this.options.show_modal && !this.options.default_store) {
                 this.element.modal('openModal', true);
+                $.cookieStorage.setConf({
+                    path: '/',
+                    expires: parseInt(this.options.cookie_lifetime)
+                });
                 $.cookieStorage.set('country_popup_shown', true);
             }
         },

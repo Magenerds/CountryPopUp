@@ -40,7 +40,6 @@ class Popup extends Template
      */
     private $http;
 
-
     /**
      * @param Config $config
      * @param Context $context
@@ -52,7 +51,8 @@ class Popup extends Template
         Context $context,
         Http $http,
         array $data = []
-    ) {
+    )
+    {
         $this->config = $config;
         $this->http = $http;
         parent::__construct($context, $data);
@@ -61,31 +61,78 @@ class Popup extends Template
     /**
      * loads modal text
      *
+     * @param $locale string
      * @return string
      */
-    public function getModalText()
+    public function getModalText($locale)
     {
-        return $this->config->getModalText();
+        $locale = ($locale) ? $locale : Config::FALLBACK;
+        return $this->config->getModalText($locale);
+    }
+
+    /**
+     * loads modal text
+     *
+     * @return string
+     */
+    public function getCookieDuration()
+    {
+        return $this->config->getCookieDuration();
+    }
+
+    /**
+     * return show for unselected state
+     *
+     * @return integer
+     */
+    public function getShowForUnselected()
+    {
+        return $this->config->getShowForUnselected();
     }
 
     /**
      * loads configured locales
      *
-     * @return string
+     * @return []
      */
     public function getHintedLocales()
     {
-        return $this->config->getLocales();
+        return $this->config->getCountries();
     }
 
     /**
-     * loads accepted languages
+     * provides current store url
      *
      * @return string
      */
-    public function getUserLocales()
+    public function getStoreUrl()
     {
-        return $this->parseLanguages($this->http->getHeader('Accept-Language'));
+        return $this->_storeManager->getStore()->getBaseUrl();
+    }
+
+    /**
+     * loads accepted languages and compare these languages with all
+     * hinted languages and break
+     *
+     * @return []
+     */
+    public function hintedCountry()
+    {
+        $hintedLangs = $this->getHintedLocales();
+        $formatedUserLangs = $this->parseUserLanguages($this->http->getHeader('Accept-Language'));
+        $processedArray = array_intersect($hintedLangs, $formatedUserLangs);
+        $lang = array_shift($processedArray);
+        $hit = $lang !== null;
+
+        return [
+            'hinted'        => $hit,
+            'locale'        => $lang,
+            'userLocales'   => implode(',', $formatedUserLangs),
+            'defaultStore'  => $this->checkDefaultStoreLang($formatedUserLangs),
+            'modalImage'    => $this->getModalImage(),
+            'storeUrl'      => $this->getStoreUrl(),
+            'modalContent'  => $this->getModalText($lang, $this->getShowForUnselected())
+        ];
     }
 
     /**
@@ -96,7 +143,6 @@ class Popup extends Template
     public function getModalImage()
     {
         $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(UrlInterface::URL_TYPE_MEDIA);
-
         if (!empty($this->config->getPopUpImage())) {
             return $mediaUrl . self::SUBMEDIA_FOLDER . '/' . $this->config->getPopUpImage();
         }
@@ -105,24 +151,41 @@ class Popup extends Template
     }
 
     /**
-     * format the accepted languages
+     * format the accepted user languages into a comparable array
      *
      * @param $acceptedLangs string
-     * @return string
+     * @return []
      */
-    private function parseLanguages($acceptedLangs)
+    private function parseUserLanguages($acceptedLangs)
     {
-        $str = '';
-        $acceptedLangs = str_replace('-','_', $acceptedLangs);
+        $acceptedLangs = str_replace(' ', '', $acceptedLangs);
+        $acceptedUserLang = [];
         foreach (explode(',', $acceptedLangs) as $lang) {
-            $ident = ';q=';
+            $lang = strtoupper($lang);
+            $ident = ';Q=';
+            $exp = '-';
             if (strpos($lang, $ident) !== false) {
-                $str .= strstr($lang, $ident, true) . ',';
+                $str = strstr($lang, $ident, true);
             } else {
-                $str .= $lang . ',';
+                $str = $lang;
+            }
+
+            if (strpos($str, $exp)) {
+                $acceptedUserLang[] = trim(strstr($str , $exp), $exp);
+            } else {
+                $acceptedUserLang[] = $str;
             }
         }
 
-        return $str;
+        return $acceptedUserLang;
+    }
+
+    /**
+     * @param [] $formatedUserLangs
+     * @return boolean
+     */
+    private function checkDefaultStoreLang($formatedUserLangs)
+    {
+        return in_array($this->config->getStoreCountry(), $formatedUserLangs);
     }
 }
