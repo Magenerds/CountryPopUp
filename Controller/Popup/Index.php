@@ -7,7 +7,7 @@
  * http://opensource.org/licenses/osl-3.0.php
  */
 
-namespace Magenerds\Countrypopup\Controller\Popup;
+namespace Magenerds\CountryPopUp\Controller\Popup;
 
 use Magenerds\CountryPopUp\Block\Popup;
 use Magenerds\CountryPopUp\Helper\Config;
