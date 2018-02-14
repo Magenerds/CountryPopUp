@@ -191,11 +191,13 @@ class Popup extends Template
     }
 
     /**
+     * check if the fist locale is the default locale store
+     *
      * @param [] $formatedUserLangs
      * @return boolean
      */
     private function checkDefaultStoreLang($formatedUserLangs)
     {
-        return in_array($this->config->getStoreCountry(), $formatedUserLangs);
+        return array_shift($formatedUserLangs) === $this->config->getStoreCountry();
     }
 }
