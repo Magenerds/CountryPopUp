@@ -55,13 +55,12 @@ define([
          * @param values object
          */
         prepareModal: function (values) {
-            var content = $(values.modalContent);
             if (values.modalImage) {
                 this.element.find('img.modal-image').attr('src', values.modalImage);
             } else {
                 this.element.find('.img-wrapper').remove();
             }
-            this.element.find('.content').append(content);
+            this.element.find('.content').append(values.modalContent);
             this.initModal();
         },
 
