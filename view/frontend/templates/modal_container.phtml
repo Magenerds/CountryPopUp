@@ -16,10 +16,13 @@
  * @author     Philipp Steinkopff <p.steinkopff@techdivision.com>
  */
 ?>
-<div data-mage-init='{"countryModal":{"contentPath": "<?php echo $this->getModalContentUrl('popup/Popup/Index'); ?>"}}' id="language-modal" style="display:none;">
-    <div class="img-wrapper">
-        <img class="modal-image" />
+
+<?php if ($this->showModal()): ?>
+    <div data-mage-init='{"countryModal":{"contentPath": "<?php echo $this->getModalContentUrl('popup/Popup/Index'); ?>"}}' id="language-modal" style="display:none;">
+        <div class="img-wrapper">
+            <img class="modal-image" />
+        </div>
+        <div class="content clearfix">
+        </div>
     </div>
-    <div class="content clearfix">
-    </div>
-</div>
+<?php endif; ?>

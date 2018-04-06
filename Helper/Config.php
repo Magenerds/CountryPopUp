@@ -73,6 +73,21 @@ class Config extends AbstractHelper
     const EDITOR_CONFIG_PATH = 'Magenerds\CountryPopUp\Model\Config\Editor';
 
     /**
+     * config path for show only on homepage
+     */
+    const SHOW_ON_HOMEPAGE_ONLY = 'countrypopup/general/homepage_only';
+
+    /**
+     * config path for use delay
+     */
+    const USE_POPUP_DELAY = 'countrypopup/popup_delay/use_delay';
+
+    /**
+     * config path for popup delay duration
+     */
+    const POPUP_DELAY_DURATION = 'countrypopup/popup_delay/delay_duration';
+
+    /**
      * fallback detect string
      */
     const FALLBACK = 'fallback';
@@ -149,5 +164,38 @@ class Config extends AbstractHelper
         }
 
         return [];
+    }
+
+    /**
+     * return if modal should be only used on homeopage
+     *
+     * @param string $scope
+     * @return bool
+     */
+    public function homepageOnly($scope = ScopeInterface::SCOPE_STORE)
+    {
+        return boolval($this->scopeConfig->getValue(self::SHOW_ON_HOMEPAGE_ONLY, $scope));
+    }
+
+    /**
+     * return if modal should use delay
+     *
+     * @param string $scope
+     * @return bool
+     */
+    public function useDelay($scope = ScopeInterface::SCOPE_STORE)
+    {
+        return boolval($this->scopeConfig->getValue(self::USE_POPUP_DELAY, $scope));
+    }
+
+    /**
+     * return duration of display delay
+     *
+     * @param string $scope
+     * @return string duration
+     */
+    public function getDelayDuration($scope = ScopeInterface::SCOPE_STORE)
+    {
+        return $this->scopeConfig->getValue(self::POPUP_DELAY_DURATION, $scope);
     }
 }
