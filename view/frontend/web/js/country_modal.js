@@ -28,6 +28,7 @@ define([
          */
         _create: function() {
             this.options.show_modal = $.cookieStorage.get('country_popup_shown');
+            this.options.show_modal = false;
             this.getModalData();
         },
 
@@ -43,6 +44,8 @@ define([
                     async: true,
                     success: function(response) {
                         that.options.default_store = (response.defaultStore) ? response.defaultStore : false;
+                        that.options.delay = (response.useDelay) ? response.delayDuration : 0;
+                        that.options.cookie_lifetime = response.cookieLifetime;
                         that.prepareModal(response);
                     }
                 });
@@ -68,7 +71,8 @@ define([
          * init modal
          */
         initModal: function () {
-            var options = {
+            var that = this,
+                options = {
                     type: 'popup',
                     responsive: true,
                     innerScroll: true,
@@ -77,12 +81,15 @@ define([
                 popup = modal(options, this.element);
 
             if (!this.options.show_modal && !this.options.default_store) {
-                this.element.modal('openModal', true);
-                $.cookieStorage.setConf({
-                    path: '/',
-                    expires: parseInt(this.options.cookie_lifetime)
-                });
-                $.cookieStorage.set('country_popup_shown', true);
+                setTimeout(function () {
+                    that.element.modal('openModal', true);
+                    $.cookieStorage.setConf({
+                        path: '/',
+                        expires: parseInt(that.options.cookie_lifetime)
+                    });
+                    $.cookieStorage.set('country_popup_shown', true);
+
+                }, this.options.delay);
             }
         }
     });
