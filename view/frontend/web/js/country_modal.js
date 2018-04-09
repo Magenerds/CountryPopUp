@@ -28,7 +28,6 @@ define([
          */
         _create: function() {
             this.options.show_modal = $.cookieStorage.get('country_popup_shown');
-            this.options.show_modal = false;
             this.getModalData();
         },
 
