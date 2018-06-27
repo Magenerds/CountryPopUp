@@ -15,6 +15,7 @@ use Magenerds\CountryPopUp\Helper\Config;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\Element\Template;
+use Magento\Theme\Block\Html\Header\Logo as Header;
 
 /**
  * @category    Magenerds
@@ -47,10 +48,16 @@ class Popup extends Template
     private $urlHelper;
 
     /**
+     * @var Header
+     */
+    private $header;
+
+    /**
      * @param Config $config
      * @param Context $context
      * @param Http $http
      * @param Url $urlHelper
+     * @param Header $header
      * @param array $data
      */
     public function __construct(
@@ -58,6 +65,7 @@ class Popup extends Template
         Context $context,
         Http $http,
         Url $urlHelper,
+        Header $header,
         array $data = []
     )
     {
@@ -65,6 +73,7 @@ class Popup extends Template
         $this->http = $http;
         parent::__construct($context, $data);
         $this->urlHelper = $urlHelper;
+        $this->header = $header;
     }
 
     /**
@@ -135,14 +144,32 @@ class Popup extends Template
         $hit = $lang !== null;
 
         return [
-            'hinted'        => $hit,
-            'locale'        => $lang,
-            'userLocales'   => implode(',', $formatedUserLangs),
-            'defaultStore'  => $this->checkDefaultStoreLang($formatedUserLangs),
-            'modalImage'    => $this->getModalImage(),
-            'storeUrl'      => $this->getStoreUrl(),
-            'modalContent'  => $this->getModalText($lang, $this->getShowForUnselected())
+            'hinted'            => $hit,
+            'locale'            => $lang,
+            'userLocales'       => implode(',', $formatedUserLangs),
+            'defaultStore'      => $this->checkDefaultStoreLang($formatedUserLangs),
+            'modalImage'        => $this->getModalImage(),
+            'storeUrl'          => $this->getBaseUrl(),
+            'useDelay'          => $this->config->useDelay(),
+            'delayDuration'     => (int)$this->config->getDelayDuration(),
+            'cookieLifetime'    => (int)$this->config->getCookieDuration(),
+            'modalContent'      => $this->getModalText($lang, $this->getShowForUnselected())
         ];
+    }
+
+    /**
+     * check if config or url compare allows modal to be shown
+     *
+     * @return bool
+     */
+    public function showModal()
+    {
+        // return true if the modal is allowed on all pages
+        if (!$this->config->homepageOnly()) {
+            return true;
+        }
+
+        return $this->header->isHomePage();
     }
 
     /**

@@ -36,6 +36,11 @@
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+                <field id="homepage_only" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Use only on Homepage</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
                 <field id="cookie" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Cookie Duration</label>
                     <validate>integer</validate>
@@ -45,7 +50,7 @@
                 <field id="unselected_countries_text" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Use for Unselected Countries Text</label>
-                    <comment><![CDATA[If "Yes" is selected the default modaltext will be shown for all countries which are not selected <br /> If the detected country is equal the <strong>current store country</strong> no hint will be shown.]]></comment>
+                    <comment><![CDATA[If "Yes" is selected the default modaltext will be shown for all countries that are not selected <br /> If the detected country is equal the <strong>current store country</strong> no hint will be shown.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
@@ -67,6 +72,19 @@
                     <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
                     <upload_dir config="system" scope_info="1">country_modal_image</upload_dir>
                     <comment>The following file types are allowed jpg, jpeg, png</comment>
+                </field>
+            </group>
+            <group id="popup_delay" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Popup delay options</label>
+                <field id="use_delay" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Use Popup delay</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="delay_duration" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delay Duration</label>
+                    <validate>integer</validate>
+                    <comment>Define length of delay until the popup appears</comment>
                 </field>
             </group>
         </section>
