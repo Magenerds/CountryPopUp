@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ */
+
+/**
+ * @category   Magenerds
+ * @package    Magenerds_CountryPopUp
+ * @subpackage etc
+ * @author     Martin Eisenführer <m.eisenfuehrer@techdivision.com>
+ * @copyright  Copyright (c) 2019 TechDivision GmbH (http://www.techdivision.com)
+ * @link       http://www.techdivision.com/
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <countrypopup>
+            <general>
+                <cookie>0</cookie>
+            </general>
+            <popup_delay>
+                <delay_duration>1000</delay_duration>
+            </popup_delay>
+        </countrypopup>
+    </default>
+</config>

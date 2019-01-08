@@ -41,11 +41,10 @@
                     <label>Use only on Homepage</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="cookie" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="cookie" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Cookie Duration</label>
                     <validate>integer</validate>
-                    <comment>Define Duration of the cookie in mm empty value is equal to session cookies</comment>
-                    <comment> <![CDATA[Define Duration of the cookie <strong>in *days*</strong> empty or 0 is equal to session duration]]></comment>
+                    <comment><![CDATA[Define Duration of the cookie <strong>in *days*</strong> empty or 0 is equal to session duration]]></comment>
                 </field>
                 <field id="unselected_countries_text" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1"
                        showInStore="1">
@@ -81,10 +80,10 @@
                     <label>Use Popup delay</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="delay_duration" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="delay_duration" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Delay Duration</label>
                     <validate>integer</validate>
-                    <comment>Define length of delay until the popup appears</comment>
+                    <comment>Define length of delay in milliseconds until the popup appears</comment>
                 </field>
             </group>
         </section>
