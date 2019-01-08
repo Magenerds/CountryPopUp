@@ -153,7 +153,8 @@ class Popup extends Template
             'useDelay'          => $this->config->useDelay(),
             'delayDuration'     => (int)$this->config->getDelayDuration(),
             'cookieLifetime'    => (int)$this->config->getCookieDuration(),
-            'modalContent'      => $this->getModalText($lang, $this->getShowForUnselected())
+            'modalContent'      => $this->getModalText($lang, $this->getShowForUnselected()),
+            'showModalOverlay'  => $this->config->getShowModal()
         ];
     }
 

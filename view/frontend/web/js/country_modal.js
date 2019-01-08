@@ -45,6 +45,7 @@ define([
                         that.options.default_store = (response.defaultStore) ? response.defaultStore : false;
                         that.options.delay = (response.useDelay) ? response.delayDuration : 0;
                         that.options.cookie_lifetime = response.cookieLifetime;
+                        that.options.show_modal_overlay = response.showModalOverlay;
                         that.prepareModal(response);
                     }
                 });
@@ -82,6 +83,9 @@ define([
             if (!this.options.show_modal && !this.options.default_store) {
                 setTimeout(function () {
                     that.element.modal('openModal', true);
+                    if (!that.options.show_modal_overlay) {
+                        $('.hint-country-modal').addClass('no-overlay');
+                    }
                     $.cookieStorage.setConf({
                         path: '/',
                         expires: parseInt(that.options.cookie_lifetime)

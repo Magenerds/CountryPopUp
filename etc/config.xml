@@ -22,6 +22,7 @@
         <countrypopup>
             <general>
                 <cookie>0</cookie>
+                <show_modal>1</show_modal>
             </general>
             <popup_delay>
                 <delay_duration>1000</delay_duration>

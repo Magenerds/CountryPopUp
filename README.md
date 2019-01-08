@@ -12,6 +12,7 @@ The Magenerds Country PopUp config options a base under the point Magenerds -> C
  - **Use only on Homepage:** Option to show the modal only on homepage.
  - **Cookie Duration:** Define Duration of the cookie in **days** empty or 0 is equal to session duration.
  - **Use for Unselected Countries Text:** Option to show the modal for every visitor and shows the **Modaltext for Unselected Counties** if no country matches the selection of **Countries that should be hinted**.
+ - **Popup as modal dialog:** Show popup as modal dialog with overlay**.
 
 #### County Modal Properties:
 
