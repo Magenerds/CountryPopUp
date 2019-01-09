@@ -9,9 +9,10 @@ The Magenerds Country PopUp config options a base under the point Magenerds -> C
 #### General:
 
  - **Enable:** Based on the selection the Module is enabled or disabled.
+ - **Use only on Homepage:** Option to show the modal only on homepage.
  - **Cookie Duration:** Define Duration of the cookie in **days** empty or 0 is equal to session duration.
- - **Enable:** Based on the selection the Module is enabled or disabled.
  - **Use for Unselected Countries Text:** Option to show the modal for every visitor and shows the **Modaltext for Unselected Counties** if no country matches the selection of **Countries that should be hinted**.
+ - **Popup as modal dialog:** Show popup as modal dialog with overlay**.
 
 #### County Modal Properties:
 
@@ -19,3 +20,7 @@ The Magenerds Country PopUp config options a base under the point Magenerds -> C
 - **Modaltext for Unselected Counties:** The Modaltext for Unselected Counties provides you a WYSIWYG-Editor that will be rendered inside of the Modal Content if **Use for Unselected Countries Text** is set on yes and if no country matches the selection of **Countries that should be hinted** 
 - **Modal Image Upload:** This field provides the option to display an image next to the Modaltext.
 - **Dynamic Fields Modaltext for Country: Selected Country**: The Dynamic Fields will only be shown if a value in **Countries that should be hinted** is saved! Depending on the saved value an equal amount of WYSIWYG-Editorfields will be provided.
+
+#### Popup delay options
+- **Use Popup delay:** Based on the selection, the popup waits until it is displayed
+- **Delay Duration:** Define the delay in milliseconds until the popup is displayed

@@ -88,6 +88,12 @@ class Config extends AbstractHelper
     const POPUP_DELAY_DURATION = 'countrypopup/popup_delay/delay_duration';
 
     /**
+     * config path for show modal
+     */
+    const SHOW_MODAL = 'countrypopup/general/show_modal';
+
+
+    /**
      * fallback detect string
      */
     const FALLBACK = 'fallback';
@@ -174,7 +180,7 @@ class Config extends AbstractHelper
      */
     public function homepageOnly($scope = ScopeInterface::SCOPE_STORE)
     {
-        return boolval($this->scopeConfig->getValue(self::SHOW_ON_HOMEPAGE_ONLY, $scope));
+        return boolval($this->scopeConfig->isSetFlag(self::SHOW_ON_HOMEPAGE_ONLY, $scope));
     }
 
     /**
@@ -185,7 +191,7 @@ class Config extends AbstractHelper
      */
     public function useDelay($scope = ScopeInterface::SCOPE_STORE)
     {
-        return boolval($this->scopeConfig->getValue(self::USE_POPUP_DELAY, $scope));
+        return boolval($this->scopeConfig->isSetFlag(self::USE_POPUP_DELAY, $scope));
     }
 
     /**
@@ -197,5 +203,16 @@ class Config extends AbstractHelper
     public function getDelayDuration($scope = ScopeInterface::SCOPE_STORE)
     {
         return $this->scopeConfig->getValue(self::POPUP_DELAY_DURATION, $scope);
+    }
+
+    /**
+     * return true if show as modal dialog
+     *
+     * @param string $scope
+     * @return bool
+     */
+    public function getShowModal($scope = ScopeInterface::SCOPE_STORE)
+    {
+        return $this->scopeConfig->isSetFlag(self::SHOW_MODAL, $scope);
     }
 }
