@@ -23,6 +23,7 @@
             <general>
                 <cookie>0</cookie>
                 <show_modal>1</show_modal>
+                <responsive_modal>1</responsive_modal>
             </general>
             <popup_delay>
                 <delay_duration>1000</delay_duration>
