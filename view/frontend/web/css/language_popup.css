@@ -24,6 +24,7 @@
 
 .hint-country-modal.no-overlay .modal-popup {
     background: transparent;
+    pointer-events: none;
 }
 
 .hint-country-modal.no-overlay .modals-overlay {
