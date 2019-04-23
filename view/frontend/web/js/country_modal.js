@@ -46,6 +46,7 @@ define([
                         that.options.delay = (response.useDelay) ? response.delayDuration : 0;
                         that.options.cookie_lifetime = response.cookieLifetime;
                         that.options.show_modal_overlay = response.showModalOverlay;
+                        that.options.modal_responsive = response.responsiveModal;
                         that.prepareModal(response);
                     }
                 });
@@ -74,7 +75,7 @@ define([
             var that = this,
                 options = {
                     type: 'popup',
-                    responsive: true,
+                    responsive: this.options.modal_responsive,
                     innerScroll: true,
                     wrapperClass: 'hint-country-modal'
                 },

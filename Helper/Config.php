@@ -94,6 +94,12 @@ class Config extends AbstractHelper
 
 
     /**
+     * config path for responsive modal setting
+     */
+    const RESPONSIVE_MODAL = 'countrypopup/general/responsive_modal';
+
+
+    /**
      * fallback detect string
      */
     const FALLBACK = 'fallback';
@@ -214,5 +220,15 @@ class Config extends AbstractHelper
     public function getShowModal($scope = ScopeInterface::SCOPE_STORE)
     {
         return $this->scopeConfig->isSetFlag(self::SHOW_MODAL, $scope);
+    }
+
+    /**
+     * return true if modal is responsive
+     * @param string $scope
+     * @return bool
+     */
+    public function isResponsiveModal($scope = ScopeInterface::SCOPE_STORE)
+    {
+        return $this->scopeConfig->isSetFlag(self::RESPONSIVE_MODAL, $scope);
     }
 }
