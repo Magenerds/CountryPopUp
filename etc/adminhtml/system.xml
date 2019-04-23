@@ -52,11 +52,16 @@
                     <comment><![CDATA[If "Yes" is selected the default modaltext will be shown for all countries that are not selected <br /> If the detected country is equal the <strong>current store country</strong> no hint will be shown.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
+
                 <field id="show_modal" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Popup as modal dialog</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[Show dialog modal with overlay]]></comment>
+                </field>
+                <field id="responsive_modal" translate="label" type="select" sortOrder="50" showInDefault="1" canRestore="1">
+                    <label>Responsive Modal</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
             <group id="popup_values" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
