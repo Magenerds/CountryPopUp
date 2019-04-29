@@ -84,6 +84,7 @@ define([
                 // only init modal dialog if necessary
                 modal(options, this.element);
                 this.element.removeClass('hide-country-popup');
+                setTimeout(function () {
                     that.element.modal('openModal', true);
                     if (!that.options.show_modal_overlay) {
                         $('.hint-country-modal').addClass('no-overlay');
