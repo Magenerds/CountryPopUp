@@ -78,10 +78,12 @@ define([
                     responsive: this.options.modal_responsive,
                     innerScroll: true,
                     wrapperClass: 'hint-country-modal'
-                },
-                popup = modal(options, this.element);
+                };
 
             if (!this.options.show_modal && !this.options.default_store) {
+                // only init modal dialog if necessary
+                modal(options, this.element);
+                this.element.removeClass('hide-country-popup');
                 setTimeout(function () {
                     that.element.modal('openModal', true);
                     if (!that.options.show_modal_overlay) {
