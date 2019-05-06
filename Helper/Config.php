@@ -16,7 +16,7 @@ use Magento\Store\Model\ScopeInterface;
  * @category    Magenerds
  * @package     Magenerds_CountryPopUp
  * @subpackage  Helper
- * @copyright   Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
+ * @copyright   Copyright (c) 2019 TechDivision GmbH (https://www.techdivision.com)
  * @link        https://www.techdivision.com/
  * @author      Philipp Steinkopff <p.steinkopff@techdivision.com>
  */

@@ -19,7 +19,7 @@ use Magento\Framework\Data\Form\Element\AbstractElement as Element;
  * @category    Magenerds
  * @package     Magenerds_CountryPopUp
  * @subpackage  Model
- * @copyright   Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
+ * @copyright   Copyright (c) 2019 TechDivision GmbH (https://www.techdivision.com)
  * @site        https://www.techdivision.com/
  * @author      Philipp Steinkopff <p.steinkopff@techdivision.com>
  */
