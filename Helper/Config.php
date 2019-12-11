@@ -179,7 +179,7 @@ class Config extends AbstractHelper
     }
 
     /**
-     * return if modal should be only used on homeopage
+     * return if modal should be only used on homepage
      *
      * @param string $scope
      * @return bool

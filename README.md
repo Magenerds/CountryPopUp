@@ -14,7 +14,7 @@ The Magenerds Country PopUp config options a base under the point Magenerds -> C
  - **Use for Unselected Countries Text:** Option to show the modal for every visitor and shows the **Modaltext for Unselected Counties** if no country matches the selection of **Countries that should be hinted**.
  - **Popup as modal dialog:** Show popup as modal dialog with overlay**.
 
-#### County Modal Properties:
+#### Country Modal Properties:
 
 - **Countries that should be hinted:** This field provides the option to select the Countries that should be hinted.
 - **Modaltext for Unselected Counties:** The Modaltext for Unselected Counties provides you a WYSIWYG-Editor that will be rendered inside of the Modal Content if **Use for Unselected Countries Text** is set on yes and if no country matches the selection of **Countries that should be hinted** 

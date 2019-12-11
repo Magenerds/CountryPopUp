@@ -42,7 +42,7 @@ define([
                     type: 'get',
                     async: true,
                     success: function(response) {
-                        that.options.default_store = (response.defaultStore) ? response.defaultStore : false;
+                        that.options.language_ok = (response.languageOk) ? response.languageOk : false;
                         that.options.delay = (response.useDelay) ? response.delayDuration : 0;
                         that.options.cookie_lifetime = response.cookieLifetime;
                         that.options.show_modal_overlay = response.showModalOverlay;
@@ -80,7 +80,7 @@ define([
                     wrapperClass: 'hint-country-modal'
                 };
 
-            if (!this.options.show_modal && !this.options.default_store) {
+            if (!this.options.show_modal && !this.options.language_ok) {
                 // only init modal dialog if necessary
                 modal(options, this.element);
                 this.element.removeClass('hide-country-popup');
