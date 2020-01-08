@@ -73,7 +73,7 @@
                     <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                 </field>
                 <field id="editor" translate="label" type="editor" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Modaltext for Unselected Counties</label>
+                    <label>Modaltext for Unselected Countries</label>
                     <comment> <![CDATA[<strong>Notice:</strong> This text will only be shown if the user is using an unknown language beside hinted and default store language and if the field "<strong>Use for Unselected Countries Text</strong>" is displayed.]]></comment>
                     <frontend_model>Magenerds\CountryPopUp\Model\Config\Editor</frontend_model>
                 </field>
