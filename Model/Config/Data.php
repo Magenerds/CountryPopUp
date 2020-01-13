@@ -6,42 +6,60 @@
  * that is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
  */
-namespace Magenerds\CountryPopUp\Plugin\Config\Structure;
+
+namespace Magenerds\CountryPopUp\Model\Config;
 
 use Magenerds\CountryPopUp\Helper\Config as ConfigHelper;
-use Magento\Config\Model\Config\Structure\Data;
+use Magento\Config\Model\Config\Structure\Data as ConfigData;
+use Magento\Config\Model\Config\Structure\Reader;
 use Magento\Directory\Model\Country;
+use Magento\Framework\Config\CacheInterface;
+use Magento\Framework\Config\ScopeInterface;
+use Magento\Framework\Serialize\SerializerInterface;
 
 /**
  * @copyright  Copyright (c) 2020 TechDivision GmbH <info@techdivision.com> - TechDivision GmbH
  * @link       http://www.techdivision.com/
  * @author     MET <met@techdivision.com >
  */
-class DataPlugin
+class Data extends ConfigData
 {
-    /** @var ConfigHelper */
+    /**@var ConfigHelper */
     private $configHelper;
 
     /** @var Country */
     private $country;
 
     /**
+     * @param Reader $reader
+     * @param ScopeInterface $configScope
+     * @param CacheInterface $cache
+     * @param $cacheId
      * @param ConfigHelper $configHelper
      * @param Country $country
+     * @param SerializerInterface|null $serializer
      */
-    public function __construct(ConfigHelper $configHelper, Country $country)
-    {
+    public function __construct(
+        Reader $reader,
+        ScopeInterface $configScope,
+        CacheInterface $cache,
+        $cacheId,
+        ConfigHelper $configHelper,
+        Country $country,
+        SerializerInterface $serializer = null
+    ) {
         $this->configHelper = $configHelper;
         $this->country = $country;
+        parent::__construct($reader, $configScope, $cache, $cacheId, $serializer);
     }
 
     /**
-     * @param Data $subject
+     * Merge additional config
+     *
      * @param array $config
-     * @return array
-     * @see Data::merge()
+     * @return void
      */
-    public function aroundMerge(Data $subject, callable $proceed, array $config)
+    public function merge(array $config)
     {
         $dynamicFields = $this->getDynamicConfigFields();
         $systemConfig = $config['config']['system']['sections']['countrypopup']['children']['popup_values']['children'];
@@ -55,7 +73,7 @@ class DataPlugin
             $config = $config['config']['system'];
         }
 
-        return $proceed($config);
+        parent::merge($config);
     }
 
     /**
