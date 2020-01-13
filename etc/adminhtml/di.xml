@@ -19,7 +19,12 @@
  -->
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magento\Config\Model\Config\Structure\Data">
-        <plugin name="config_structure_data_plugin" type="Magenerds\CountryPopUp\Plugin\Config\Structure\DataPlugin"/>
-    </type>
+
+    <!--
+    * We have to override the backend-savings for dynamic config fields with a preference because a plugin throws
+    * the following error on bin/magento app:config:import
+    * - "Import failed: Circular dependency: Magenerds\CountryPopUp\Plugin\Config\Structure\DataPlugin
+    *    depends on Magento\Logging\Model\Handler\Controllers and vice versa."
+    -->
+    <preference for="Magento\Config\Model\Config\Structure\Data" type="Magenerds\CountryPopUp\Model\Config\Data"/>
 </config>
