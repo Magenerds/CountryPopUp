@@ -34,7 +34,7 @@ class Data extends ConfigData
      * @param Reader $reader
      * @param ScopeInterface $configScope
      * @param CacheInterface $cache
-     * @param $cacheId
+     * @param string $cacheId
      * @param ConfigHelper $configHelper
      * @param Country $country
      * @param SerializerInterface|null $serializer
@@ -43,7 +43,7 @@ class Data extends ConfigData
         Reader $reader,
         ScopeInterface $configScope,
         CacheInterface $cache,
-        $cacheId,
+        string $cacheId,
         ConfigHelper $configHelper,
         Country $country,
         SerializerInterface $serializer = null
