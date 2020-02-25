@@ -10,8 +10,8 @@
  * @category   Magenerds
  * @package    Magenerds_CountryPopUp
  * @subpackage view
- * @copyright  Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
- * @link       http://www.techdivision.com/
+ * @copyright  Copyright (c) 2019 TechDivision GmbH (https://www.techdivision.com)
+ * @link       https://www.techdivision.com/
  * @author     Philipp Steinkopff <p.steinkopff@techdivision.com>
  */
 
@@ -42,7 +42,7 @@ define([
                     type: 'get',
                     async: true,
                     success: function(response) {
-                        that.options.default_store = (response.defaultStore) ? response.defaultStore : false;
+                        that.options.language_ok = (response.languageOk) ? response.languageOk : false;
                         that.options.delay = (response.useDelay) ? response.delayDuration : 0;
                         that.options.cookie_lifetime = response.cookieLifetime;
                         that.options.show_modal_overlay = response.showModalOverlay;
@@ -78,10 +78,12 @@ define([
                     responsive: this.options.modal_responsive,
                     innerScroll: true,
                     wrapperClass: 'hint-country-modal'
-                },
-                popup = modal(options, this.element);
+                };
 
-            if (!this.options.show_modal && !this.options.default_store) {
+            if (!this.options.show_modal && !this.options.language_ok) {
+                // only init modal dialog if necessary
+                modal(options, this.element);
+                this.element.removeClass('hide-country-popup');
                 setTimeout(function () {
                     that.element.modal('openModal', true);
                     if (!that.options.show_modal_overlay) {

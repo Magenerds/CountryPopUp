@@ -21,7 +21,7 @@ use Magento\Theme\Block\Html\Header\Logo as Header;
  * @category    Magenerds
  * @package     Magenerds_CountryPopUp
  * @subpackage  Block
- * @copyright   Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
+ * @copyright   Copyright (c) 2019 TechDivision GmbH (https://www.techdivision.com)
  * @site        https://www.techdivision.com/
  * @author      Philipp Steinkopff <p.steinkopff@techdivision.com>
  */
@@ -35,22 +35,22 @@ class Popup extends Template
     /**
      * @var Config
      */
-    private $config;
+    protected $config;
 
     /**
      * @var Http
      */
-    private $http;
+    protected $http;
 
     /**
      * @var Url
      */
-    private $urlHelper;
+    protected $urlHelper;
 
     /**
      * @var Header
      */
-    private $header;
+    protected $header;
 
     /**
      * @param Config $config
@@ -138,16 +138,16 @@ class Popup extends Template
     public function hintedCountry()
     {
         $hintedLangs = $this->getHintedLocales();
-        $formatedUserLangs = $this->parseUserLanguages($this->http->getHeader('Accept-Language'));
-        $processedArray = array_intersect($hintedLangs, $formatedUserLangs);
+        $formattedUserLangs = $this->parseUserLanguages($this->http->getHeader('Accept-Language'));
+        $processedArray = array_intersect($hintedLangs, $formattedUserLangs);
         $lang = array_shift($processedArray);
         $hit = $lang !== null;
 
         return [
             'hinted'            => $hit,
             'locale'            => $lang,
-            'userLocales'       => implode(',', $formatedUserLangs),
-            'defaultStore'      => $this->checkDefaultStoreLang($formatedUserLangs),
+            'userLocales'       => implode(',', $formattedUserLangs),
+            'languageOk'        => $this->checkLanguage($formattedUserLangs),
             'modalImage'        => $this->getModalImage(),
             'storeUrl'          => $this->getBaseUrl(),
             'useDelay'          => $this->config->useDelay(),
@@ -190,12 +190,12 @@ class Popup extends Template
     }
 
     /**
-     * format the accepted user languages into a comparable array
+     * Format the accepted user languages into a comparable array
      *
      * @param $acceptedLangs string
-     * @return []
+     * @return array
      */
-    private function parseUserLanguages($acceptedLangs)
+    protected function parseUserLanguages($acceptedLangs)
     {
         $acceptedLangs = str_replace(' ', '', $acceptedLangs);
         $acceptedUserLang = [];
@@ -220,13 +220,13 @@ class Popup extends Template
     }
 
     /**
-     * check if the fist locale is the default locale store
+     * Check if the locale is the default store locale
      *
-     * @param [] $formatedUserLangs
+     * @param array $formattedUserLangs
      * @return boolean
      */
-    private function checkDefaultStoreLang($formatedUserLangs)
+    public function checkLanguage(array $formattedUserLangs)
     {
-        return array_shift($formatedUserLangs) === $this->config->getStoreCountry();
+        return array_shift($formattedUserLangs) === $this->config->getStoreCountry();
     }
 }

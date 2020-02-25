@@ -12,8 +12,8 @@
  * @package    Magenerds_CountryPopUp
  * @subpackage view
  * @author     Philipp Steinkopff <p.steinkopff@techdivision.com>
- * @copyright  Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
- * @link       http://www.techdivision.com/
+ * @copyright  Copyright (c) 2019 TechDivision GmbH (https://www.techdivision.com)
+ * @link       https://www.techdivision.com/
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

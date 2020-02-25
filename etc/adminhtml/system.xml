@@ -13,8 +13,8 @@
  * @package    Magenerds_CountryPopUp
  * @subpackage etc
  * @author     Philipp Steinkopff <p.steinkopff@techdivision.com>
- * @copyright  Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
- * @link       http://www.techdivision.com/
+ * @copyright  Copyright (c) 2019 TechDivision GmbH (https://www.techdivision.com)
+ * @link       https://www.techdivision.com/
  */
  -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -65,7 +65,7 @@
                 </field>
             </group>
             <group id="popup_values" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>County Modal Properties</label>
+                <label>Country Modal Properties</label>
                 <field id="countries" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Countries that should be hinted</label>
@@ -73,7 +73,7 @@
                     <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                 </field>
                 <field id="editor" translate="label" type="editor" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Modaltext for Unselected Counties</label>
+                    <label>Modaltext for Unselected Countries</label>
                     <comment> <![CDATA[<strong>Notice:</strong> This text will only be shown if the user is using an unknown language beside hinted and default store language and if the field "<strong>Use for Unselected Countries Text</strong>" is displayed.]]></comment>
                     <frontend_model>Magenerds\CountryPopUp\Model\Config\Editor</frontend_model>
                 </field>

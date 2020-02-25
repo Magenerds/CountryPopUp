@@ -11,14 +11,15 @@
  * @category   Magenerds
  * @package    Magenerds_CountryPopUp
  * @subpackage view
- * @copyright  Copyright (c) 2018 TechDivision GmbH (http://www.techdivision.com)
- * @link       http://www.techdivision.com/
+ * @copyright  Copyright (c) 2019 TechDivision GmbH (https://www.techdivision.com)
+ * @link       https://www.techdivision.com/
  * @author     Philipp Steinkopff <p.steinkopff@techdivision.com>
  */
-?>
 
+/** @var \Magenerds\CountryPopUp\Block\Popup $block */
+?>
 <?php if ($this->showModal()): ?>
-    <div data-mage-init='{"countryModal":{"contentPath": "<?php echo $this->getModalContentUrl('popup/Popup/Index'); ?>"}}' id="language-modal" style="display:none;">
+    <div data-mage-init='{"countryModal":{"contentPath": "<?php echo $this->getModalContentUrl('popup/Popup/Index'); ?>"}}' id="language-modal" class="hide-country-popup" style="display:none;">
         <div class="img-wrapper">
             <img class="modal-image" />
         </div>
